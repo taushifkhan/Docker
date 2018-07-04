@@ -13,14 +13,16 @@ Dockerfile : ./gmxDocker/Dockerfile
 ## Build
 
 1. cd gmxDocker
-2. docker build .
+2. `docker build .`
 
 Using Dockerfile , docker will go through all the instructions. Important is cuda configuration
 
 ### CUDA configuration [example]
+`
 ENV CUDA_HOME=/usr/local/cuda-9.0
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/lib64/stubs
 ENV PATH=$PATH:/usr/local/cuda-9.0/bin
+`
 
 gromacs will be installed in /opt/gromacs
 
@@ -32,18 +34,18 @@ A successful bult will give an container id <cid>. Which will be used in further
 
 We will mount a volume to the container which has the gromacs configured file (.tpr). nvidia has to be passed on runtime (see https://github.com/NVIDIA/nvidia-docker).
 
-docker run -v '/home/gmxDocker/TestVol:/home/gmx/' --runtime=nvidia -it <cid> /bin/bash -c 'source /opt/gromacs/bin/GMXRC ;gmx -version; ls'
+`docker run -v '/home/gmxDocker/TestVol:/home/gmx/' --runtime=nvidia -it <cid> /bin/bash -c 'source /opt/gromacs/bin/GMXRC ;gmx -version; ls'`
 
 Check (for no zero value)
- CUDA driver:        9.0 
- CUDA runtime:       9.0
+ * CUDA driver:        9.0 
+ * CUDA runtime:       9.0
 if you find these values to be unusual, check the confuguration of nvidia and cuda
 
 2. Launch a md run
 
 The pre compiled tpr file will be used to check the nvidia-GPU compilation
 
-docker run -v '/home/gmxDocker/TestVol:/home/gmx/' --runtime=nvidia -it <cid> /bin/bash -c 'source /opt/gromacs/bin/GMXRC ;gmx -version; ls; gmx mdrun -s 2Jv8_6_10ms.tpr -gpu_id 0'
+`docker run -v '/home/gmxDocker/TestVol:/home/gmx/' --runtime=nvidia -it <cid> /bin/bash -c 'source /opt/gromacs/bin/GMXRC ;gmx -version; ls; gmx mdrun -s 2Jv8_6_10ms.tpr -gpu_id 0'`
 
 
 
