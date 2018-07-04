@@ -19,9 +19,9 @@ Using Dockerfile , docker will go through all the instructions. Important is cud
 
 ### CUDA configuration [example]
 `
-ENV CUDA_HOME=/usr/local/cuda-9.0
-ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/lib64/stubs
-ENV PATH=$PATH:/usr/local/cuda-9.0/bin
+ENV CUDA_HOME=/usr/local/cuda-9.0`
+`ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/lib64/stubs`
+`ENV PATH=$PATH:/usr/local/cuda-9.0/bin
 `
 
 gromacs will be installed in /opt/gromacs
